@@ -1,0 +1,56 @@
+
+<!---    -->
+
+
+<div class="w-full page">
+    <!--Inside Navbar -->
+    <div style="height: 50px;" class="w-100 bg-gray-50 border-b-2 flex">
+        <button class="font-bold bg-red-200 rounded  mx-3 my-auto px-2" (click)="goBack()">Back</button>
+        <div class="my-auto px-3 font-bold text-md flex bg-gray-50" >Path :  <div class="text-sm bg-gray-50 px-2 my-auto flex text-sm">
+             <button class="text-blue-600 outline-0 text-md bg-gray-50 border-0" (click)="goTo(-1)" >{{repoName}}</button>/
+            <div *ngFor="let pathpart of pathArray; let i =index" class="flex my-auto"><button *ngIf="pathpart!=''" class="text-blue-600 outline-0 text-sm bg-gray-50 border-0" (click)="goTo(i)">{{pathpart}}</button> / </div>
+        </div></div>
+        
+        <!--
+        <form  class="w-auto my-auto h-3/4 relative ms-auto ">
+            <input style="width: 300px;" class="my-auto border z-1 h-full rounded-l-md px-3 text-md">
+            <button  type="submit" class="fa fa-search p-2 px-3 bg-gray-200 rounded-r-md absolute top-0 h-full"></button>
+        </form>
+        -->
+    
+        <div class="my-auto ms-auto px-10">
+            <button (click)="DeleteFile()" *ngIf="Selected" class="px-3 me-2 py-1 rounded-md bg-red-600 text-md font-bold text-white">Delete File</button>
+            <button (click)="MakeNewFile()" class="px-3 py-1 rounded-md bg-green-600 text-md font-bold text-white">New File</button>
+            <button (click)="MakeNewFolder()" class="px-3 py-1 ms-2 rounded-md bg-blue-600 text-md font-bold text-white">New Folder</button>
+            
+        </div>
+    </div>
+    
+    <div  class="flex flex-wrap viewzone"  (click)="deSelectFile()" >
+        <div class="p-3" *ngFor="let dir of contents" >
+            
+
+            <div *ngIf="dir['type']=='file'">
+                <div  (click)="SingleClick(dir['name'],dir['type'],dir['path'])" (dblclick)="doubleClick(dir['name'],dir['type'],dir['path'])" class="z-4 rounded-md p-1" id="{{dir['name']}}"  *ngIf="dir['name']!='INIT' && dir['scanned']">
+                    <img *ngIf="dir['type']=='dir'" style="height: 100px;"  src="../../assets/folderIcon.png">
+                    <img *ngIf="dir['type']=='file'" style="height: 100px;"  src="../../assets/docIcon.png">
+                    <div class="text-center w-100 ">{{dir["name"]}}</div> 
+                </div>
+
+                <div class="z-4 rounded-md p-1" id="{{dir['name']}}"  *ngIf="dir['name']!='INIT' && !dir['scanned']">
+                    <img *ngIf="dir['type']=='dir'" style="height: 100px; opacity: 0.25;"  src="../../assets/folderIcon.png">
+                    <img *ngIf="dir['type']=='file'" style="height: 100px;opacity: 0.25;"  src="../../assets/docIcon.png">
+                    <div class="text-center w-100 ">{{dir["name"]}}</div> 
+                </div>
+            </div>    
+            
+            <div *ngIf="dir['type']=='dir'">
+                <div  (click)="SingleClick(dir['name'],dir['type'],dir['path'])" (dblclick)="doubleClick(dir['name'],dir['type'],dir['path'])" class="z-4 rounded-md p-1" id="{{dir['name']}}"  *ngIf="dir['name']!='INIT'">
+                    <img *ngIf="dir['type']=='dir'" style="height: 100px;"  src="../../assets/folderIcon.png">
+                    <div class="text-center w-100 ">{{dir["name"]}}</div> 
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+

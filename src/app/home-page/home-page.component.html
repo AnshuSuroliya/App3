@@ -1,0 +1,68 @@
+
+<div class="w-full">
+    <div style="height: 50px;" class="w-100 bg-gray-100 border-b-2 flex">
+            <button *ngIf="!NewRepoWindow" (click)="ToogleNewRepoWindow(true)" style="width: 150px;" class="px-3 my-2 mx-2 rounded-md bg-green-600 text-md font-bold text-white ms-auto">New Collection</button>
+            <button *ngIf="NewRepoWindow" (click)="ToogleNewRepoWindow(false)" style="width: 150px;" class="px-3 my-2 mx-2 rounded-md bg-green-600 text-md font-bold text-white">Back</button>
+    </div>
+
+    <div *ngIf="!NewRepoWindow"  class="gap-y-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ms-3">
+        <div class="p-3 rounded-md mx-2 my-2 border relative" style="width:300px;height: 100px;" *ngFor="let dir of contents" (dblclick)="doubleClick(dir['name'])">
+            <button (click)="OpenRepo(dir['owner'],dir['name'])" class="absolute top-2 left-3 font-sans font-medium text-lg text-BlueTone" title="Open this Repo">{{dir["name"]}}</button> 
+            <div *ngIf="isOwner(dir['owner'])" title="You are Owner of Repo" class="rounded-full border-2 border-gray-100 text-xs absolute bottom-2 left-3 px-1">
+                Owner
+            </div>
+            <div *ngIf="!isOwner(dir['owner'])" title="You are only a Accessor of Repo!" class="rounded-full border-2 border-gray-100 text-xs px-1 absolute bottom-2 left-3">
+                Access
+            </div>
+            <button (click)="ToManageRepo(dir['name'],dir['owner'])" class="fa-gear fa-solid  text-gray-500 absolute top-3 right-3" title="manage this repo"></button>
+        </div>
+    </div>
+
+    <div *ngIf="NewRepoWindow" class="w-full flex">
+        <div class="w-full sm:w-8/12 md:w-8/12 lg:w-7/12 mx-auto sm:my-10 flex flex-col" style="height: 400px;">
+            <h1 class="text-3xl font-semibold w-full font-sans">Create A New Collection</h1>
+            <p class="text-gray-500">A collection is used to store your invoices and their Scanned Data.</p>
+            <div class="mt-10 flex">
+                <div class="relative me-3">
+                    <p class="absolute -top-6 font-lg font-semibold">Owner</p>
+                    <p class="font-lg font-semibold border rounded-md p-1">{{userEmail}}</p>
+                </div>
+                <p class="text-xl font-semibold">/</p>
+                <div class="relative ms-3">
+                    <input [(ngModel)]="newRepoName" value="newRepoName" name="newRepoName" class="px-3 py-1 border rounded-md outline-BlueTone outline-1">
+                    <p class="absolute -top-6 font-lg font-semibold">Collection Name *</p>
+                </div>
+                <p class="text-red-600 font-semibold text-sm mx-3 mt-1">{{RepoNameError}}</p>
+               
+            </div>
+            <p class="text-gray-500 text-sm my-2">Keep the Name Meanfull! its always better than 'myfavRepo'</p>
+        
+            <div class="flex">
+                <form (submit)="addUser()" class="relative mt-8 ">
+                    <input [(ngModel)]="tempUserEmail" value="tempUserEmail" name="tempUserEmail" class="px-3 py-1 border rounded-md outline-BlueTone outline-1">
+                    <div class="absolute -top-6 font-lg font-semibold flex">Add Users <p class="text-gray-500">(Optional)</p></div>
+                    <p class="text-red-600 text-md font-semibold absolute -right-40 top-1">{{emailError}}</p>
+                </form>
+            </div>
+
+            <div class="rounded w-auto p-3 flex flex-wrap my-3 bg-green-100" >
+                <div class="rounded-full px-1 border mx-1 bg-white my-2">
+                    {{userEmail}}
+                </div>
+                <div *ngFor="let user of accessors" class="rounded-full ps-2 pe-1 border mx-1 bg-white my-2">
+                    {{user}}
+                    <button class="border rounded-full px-1 text-xs" (click)="removeUser(user)">X</button>
+                </div>
+            </div>
+
+            <div class="relative mt-8">
+                <textarea  [(ngModel)]="repoDisc" value="repoDisc" name="repoDisc" style="height: 100px;" class="px-3 py-1 border rounded-md outline-BlueTone outline-1 w-full text-mg"></textarea>
+                <div class="absolute -top-6 font-lg font-semibold flex">Discription <p class="text-gray-500">(Optional)</p></div>
+            </div>
+
+            <button (click)="MakeNewRepo()" class="bg-green-600 rounded-lg text-white text-lg">Create</button>
+        </div>
+
+    </div>
+    
+</div>

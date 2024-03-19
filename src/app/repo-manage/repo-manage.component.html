@@ -1,0 +1,48 @@
+
+
+<div style="height: 50px;" class="w-100 bg-gray-100 border-b-2 flex">
+    <button (click)="GoToHome()" style="width: 150px;" class="px-3 my-2 mx-2 rounded-md bg-green-600 text-md font-bold text-white">Back</button>
+</div>
+
+<div class="w-full flex">
+    <div class="w-full sm:w-8/12 md:w-8/12 lg:w-7/12 mx-auto sm:my-10 flex flex-col" style="height: 400px;">
+        
+        <div class="w-100 flex">
+            <h1 class="text-3xl font-semibold w-full font-sans">Update Access to Users</h1>
+            <button (Click)="DeleteRepo()" class="rounded-md text-white bg-red-600 px-2">Delete</button>
+        </div>
+        <p class="text-gray-500">You can choose who can see and use this collection.</p>
+        <div class="mt-10 flex">
+            <div class="relative me-3">
+                <p class="absolute -top-6 font-lg font-semibold">Owner</p>
+                <p class="font-lg font-semibold border rounded-md p-1">{{ownerEmail}}</p>
+            </div>
+            <p class="text-xl font-semibold">/</p>
+            <div class="relative ms-3" style="min-width: 100px;">
+                <p  class="px-3 py-1 border rounded-md outline-BlueTone outline-1">{{repoName}}</p>
+                <p class="absolute -top-6 font-lg font-semibold">Name</p>
+            </div>
+           
+        </div>
+        
+        <div class="flex mt-10">
+            <div class="relative">
+                <p class="text-red-600 text-md font-semibold absolute -top-6 left-1">{{emailError}}</p>
+                <input [(ngModel)]="tempUserEmail" value="tempUserEmail" name="tempUserEmail" class="px-3 py-1 border rounded-md outline-BlueTone outline-1">
+            </div>
+            <button (click)="addUser()" class="bg-green-600 rounded-md text-white mx-2 px-1">Add User</button>
+           <!--- <button (click)="removeUser()" class="bg-red-600 rounded-md text-white ms-2 px-1">Remove User</button>-->
+        </div>
+    
+
+        <div class="rounded w-auto  flex flex-wrap my-3 bg-green-100" >
+            <div *ngFor="let user of emailList" class="rounded-full ps-2 pe-1 border mx-1 bg-white my-2">
+                {{user}}
+                <button class="border rounded-full px-1 text-xs" (click)="removeUserEmail(user)">X</button>
+            </div>
+        </div>
+
+        <button (click)="UpdateRepo()" class="bg-green-600 rounded-lg text-white text-lg">Update</button>
+    </div>
+
+</div>

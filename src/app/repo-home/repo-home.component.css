@@ -1,0 +1,20 @@
+button:hover,img:hover{
+    cursor: pointer;
+}
+
+.viewzone{
+    width: 100vw;
+}
+
+.page{
+    height: calc(100% - 50px);
+}
+
+.imageRenderer{
+    height: calc(100vh - 60px);
+    width: 100vw;
+    z-index: -10;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

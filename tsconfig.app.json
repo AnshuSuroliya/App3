@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": [],
+    "target": "es2020"
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts",
+    "src/app/home-page/home-page.module.ts",
+    "src/app/repo-home/repo-home.module.ts",
+    "src/app/show-img/show-img.module.ts",
+    "src/app/repo-manage/repo-manage.module.ts",
+    "src/app/new-file/new-file.module.ts"
+  ]
+}

@@ -1,0 +1,15 @@
+
+<div style="height: 50px;" class="w-100 bg-gray-50 border-b-2 flex">
+    <button class="font-bold bg-red-200 rounded  mx-3 my-auto px-2" (click)="goBack()">Back</button>
+</div>
+
+<div class="viewzone flex flex-col">
+    
+<div  class="mx-auto my-auto rounded-lg shadow-md p-10 bg-BlueTone flex flex-col">
+    <input [disabled]="updating" [(ngModel)]="name" name="name" class="p-2 w-full rounded-md my-5" maxlength="20" placeholder="Enter Name" >
+    <input *ngIf="type!='folder'" [(ngModel)]="imageInput" name="imageInput" type="file" class="" (change)="onFileChange($event)">
+    <div class="mx-auto text-red-600 text-lg font-semibold">{{CreateError}}</div>
+    <button (click)="UploadFile()" *ngIf="!updating" class="py-2 px-1 bg-white my-5 rounded-md" type="submit"><p *ngIf="type!='folder' && !updating">Upload</p> <p *ngIf="type=='folder'">Create</p></button>
+    <button (click)="UpdateFile()" class="py-2 px-1 bg-white my-5 rounded-md" type="submit" *ngIf="type!='folder' && updating">Update?</button>
+</div>
+</div>

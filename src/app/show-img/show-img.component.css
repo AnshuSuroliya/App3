@@ -1,0 +1,13 @@
+
+.viewzone{
+    height: calc(100vh - 110px);
+    padding: 10px;
+}
+
+.imageRenderer{
+    height: calc(100vh - 60px);
+    z-index: -10;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
